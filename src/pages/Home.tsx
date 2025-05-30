@@ -1,4 +1,5 @@
 import React from 'react';
+import ProjectStatus from '../components/ProjectStatus';
 import PortfolioCard from '../components/PortfolioCard';
 import MissionLog from '../components/MissionLog';
 import MissionProgress from '../components/MissionProgress';
@@ -7,6 +8,8 @@ import AllyTracker from '../components/AllyTracker';
 const Home: React.FC = () => {
   return (
     <div className="p-6 space-y-6">
+      <ProjectStatus />
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <PortfolioCard />
         <MissionLog />
