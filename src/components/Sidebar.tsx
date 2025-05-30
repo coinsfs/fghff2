@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Home, 
   Gift, 
@@ -8,19 +9,23 @@ import {
   Users, 
   ShoppingBag,
   Menu,
-  X
+  X,
+  Zap
 } from 'lucide-react';
 
 interface NavItemProps {
   icon: React.ReactNode;
   label: string;
+  path?: string;
   active?: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ icon, label, active = false, disabled = false }) => {
+const NavItem: React.FC<NavItemProps> = ({ icon, label, path, active = false, disabled = false, onClick }) => {
   return (
     <div 
+      onClick={!disabled && onClick ? onClick : undefined}
       className={`relative flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer group
         ${active 
           ? 'bg-purple-900/30 text-purple-300 border border-purple-500/50' 
@@ -49,6 +54,9 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, active = false, disabled
 };
 
 const Sidebar: React.FC<{ isOpen: boolean; toggle: () => void }> = ({ isOpen, toggle }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <>
       {/* Mobile menu toggle */}
@@ -87,7 +95,18 @@ const Sidebar: React.FC<{ isOpen: boolean; toggle: () => void }> = ({ isOpen, to
         </div>
 
         <div className="p-4 flex-1 space-y-2 overflow-y-auto hide-scrollbar">
-          <NavItem icon={<Home size={18} />} label="Home" active />
+          <NavItem 
+            icon={<Home size={18} />} 
+            label="Home" 
+            active={location.pathname === '/'} 
+            onClick={() => navigate('/')}
+          />
+          <NavItem 
+            icon={<Zap size={18} />} 
+            label="Mission Terminal" 
+            active={location.pathname === '/missions'} 
+            onClick={() => navigate('/missions')}
+          />
           <NavItem icon={<Gift size={18} />} label="Airdrop" disabled />
           <NavItem icon={<Wallet size={18} />} label="Stake Token" disabled />
           <NavItem icon={<Image size={18} />} label="Stake NFT" disabled />
