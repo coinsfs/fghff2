@@ -6,34 +6,82 @@ const ProjectStatus: React.FC = () => {
   const totalMissions = 7;
   const recruitedAllies = 2;
 
+  const badges = [
+    {
+      id: 'observer',
+      name: 'Observer Elite',
+      image: '/assets/badges/observer_badge.png',
+      rarity: 'Legendary'
+    },
+    {
+      id: 'ally',
+      name: 'Trusted Ally',
+      image: '/assets/badges/ally_badge.png',
+      rarity: 'Epic'
+    },
+    {
+      id: 'field',
+      name: 'Field Agent',
+      image: '/assets/badges/field_agent_badge.png',
+      rarity: 'Rare'
+    }
+  ];
+
   return (
     <div className="relative rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-gray-900 to-gray-900/80 border border-purple-500/20 backdrop-blur-sm p-5 mb-6">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-cyan-400 to-green-400"></div>
       
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <Sparkles size={24} className="text-purple-400" />
-          <h2 className="text-xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-300 to-green-400">
-            Welcome back, Commander Vega
-          </h2>
+      <div className="flex justify-between items-start">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <Sparkles size={24} className="text-purple-400" />
+            <h2 className="text-xl font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-300 to-green-400">
+              Welcome back, Commander Vega
+            </h2>
+          </div>
+
+          <div className="space-y-2 font-mono">
+            <div className="flex items-center gap-2 text-cyan-400">
+              <Target size={16} />
+              <span>Status: Phase 2 — Airdrop Initiated</span>
+            </div>
+            
+            <div className="flex items-center gap-4 text-gray-400">
+              <div className="flex items-center gap-2">
+                <Rocket size={16} className="text-purple-400" />
+                <span>Missions: {completedMissions}/{totalMissions}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <span>Allies: {recruitedAllies}</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="space-y-2 font-mono">
-          <div className="flex items-center gap-2 text-cyan-400">
-            <Target size={16} />
-            <span>Status: Phase 2 — Airdrop Initiated</span>
-          </div>
-          
-          <div className="flex items-center gap-4 text-gray-400">
-            <div className="flex items-center gap-2">
-              <Rocket size={16} className="text-purple-400" />
-              <span>Missions: {completedMissions}/{totalMissions}</span>
+        <div className="flex gap-3">
+          {badges.map((badge) => (
+            <div 
+              key={badge.id}
+              className="group relative flex flex-col items-center"
+            >
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500/30 bg-gray-800/50 transition-all duration-300 group-hover:border-cyan-400/50">
+                <img 
+                  src={badge.image} 
+                  alt={badge.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-purple-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
+                <div className="bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md border border-purple-500/30">
+                  <div className="text-[10px] font-mono text-cyan-400">{badge.name}</div>
+                  <div className="text-[10px] font-mono text-purple-400">{badge.rarity}</div>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500"></div>
-              <span>Allies: {recruitedAllies}</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
