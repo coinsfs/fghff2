@@ -98,14 +98,14 @@ const Sidebar: React.FC<{ isOpen: boolean; toggle: () => void }> = ({ isOpen, to
           <NavItem 
             icon={<Home size={18} />} 
             label="Home" 
-            active={location.pathname === '/dashboard'} 
-            onClick={() => navigate('/dashboard')}
+            active={location.pathname === '/'} 
+            onClick={() => navigate('/')}
           />
           <NavItem 
             icon={<Zap size={18} />} 
             label="Mission Terminal" 
-            active={location.pathname === '/dashboard/mission-terminal'} 
-            onClick={() => navigate('/dashboard/mission-terminal')}
+            active={location.pathname === '/mission-terminal'} 
+            onClick={() => navigate('/mission-terminal')}
           />
           <NavItem icon={<Gift size={18} />} label="Airdrop" disabled />
           <NavItem icon={<Wallet size={18} />} label="Stake Token" disabled />
